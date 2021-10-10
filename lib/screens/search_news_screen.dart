@@ -15,35 +15,37 @@ class SearchNewsScreen extends StatelessWidget {
         title: Text('Search News Headlines'),
       ),
       drawer: DrawerWidget(),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              controller: controller.searchTextController,
-              decoration: InputDecoration(
-                prefixIcon: Icon(Icons.search, color: Colors.indigo,),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.indigo),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.indigoAccent),
-                  borderRadius: BorderRadius.circular(8),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: controller.searchTextController,
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.search, color: Colors.indigo,),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.indigo),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.indigoAccent),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                 ),
               ),
             ),
-          ),
-          Expanded(
-            child: Obx((){
-              return controller.isLoading.isTrue
-                  ? Center(child: CircularProgressIndicator())
-                  : controller.articles.isEmpty
-                  ? Center(child: Text('No news found'))
-                  : ArticlesListview(articlesList: controller.articles);
-            }),
-          ),
-        ],
+            Expanded(
+              child: Obx((){
+                return controller.isLoading.isTrue
+                    ? Center(child: CircularProgressIndicator())
+                    : controller.articles.isEmpty
+                    ? Center(child: Text('No news found'))
+                    : ArticlesListview(articlesList: controller.articles);
+              }),
+            ),
+          ],
+        ),
       ),
     );
   }
