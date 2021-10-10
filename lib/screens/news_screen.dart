@@ -16,11 +16,13 @@ class NewsScreen extends StatelessWidget {
         title: Text('News Headlines'),
       ),
       drawer: DrawerWidget(),
-      body: Obx(() {
-        return controller.isLoading.isTrue
-            ? Center(child: CircularProgressIndicator())
-            : RefreshIndicator(onRefresh: () => controller.loadNews(),child: ArticlesListview(articlesList: controller.articles));
-      }),
+      body: SafeArea(
+        child: Obx(() {
+          return controller.isLoading.isTrue
+              ? Center(child: CircularProgressIndicator())
+              : RefreshIndicator(onRefresh: () => controller.loadNews(),child: ArticlesListview(articlesList: controller.articles));
+        }),
+      ),
     );
   }
 }
