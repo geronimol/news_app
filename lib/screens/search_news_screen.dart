@@ -21,7 +21,13 @@ class SearchNewsScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
-                controller: controller.searchTextController,
+                onSubmitted: (String s) {
+                  if(s.isNotEmpty) {
+                    controller.searchNews(s);
+                  } else {
+                    Get.snackbar('Empty query', 'Please write something to search news');
+                  }
+                },
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.search, color: Colors.indigo,),
                   enabledBorder: OutlineInputBorder(
